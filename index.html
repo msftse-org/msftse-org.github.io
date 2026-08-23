@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#030912" />
+    <title>MSFTSE — Solution Engineering Lab</title>
+    <meta name="description" content="Practical Azure and AI accelerators built by Microsoft solution engineers." />
+    <meta property="og:title" content="MSFTSE — Solution Engineering Lab" />
+    <meta property="og:description" content="Solutions that move from signal to impact." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://msftse-org.github.io/" />
+    <meta property="og:image" content="https://msftse-org.github.io/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MSFTSE — Solution Engineering Lab" />
+    <meta name="twitter:description" content="Solutions that move from signal to impact." />
+    <meta name="twitter:image" content="https://msftse-org.github.io/og.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="grid" aria-hidden="true"></div>
+      <div class="orb orbOne" aria-hidden="true"></div>
+      <div class="orb orbTwo" aria-hidden="true"></div>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="MSFTSE home">
+          <span class="brandMark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>MSFTSE</span>
+        </a>
+        <div class="navMeta"><span class="statusDot" aria-hidden="true"></span><span>Solution Engineering Lab</span></div>
+        <a class="navLink" href="https://github.com/msftse-org">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="eyebrow"><span>FIELD / BUILT</span><span class="eyebrowLine"></span><span>AZURE / AI</span></div>
+        <h1>Solutions that move<span>from signal to impact.</span></h1>
+        <div class="heroFooter">
+          <p>A living collection of practical accelerators built by Microsoft solution engineers—designed to turn ambitious ideas into working systems.</p>
+          <a class="primaryCta" href="#solutions">Explore the work <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="solutions" id="solutions">
+        <div class="sectionHeading"><p>Selected repositories</p><span id="result-count">02 / SHOWN</span></div>
+        <div class="catalogControls">
+          <label class="searchBox">
+            <span class="searchIcon" aria-hidden="true">⌕</span>
+            <span class="srOnly">Search repositories</span>
+            <input id="search-input" type="search" placeholder="Search solutions, use cases, technologies…" />
+            <span class="keyHint" aria-hidden="true">SEARCH</span>
+          </label>
+          <div class="filters" role="group" aria-label="Filter repositories by category">
+            <button class="active" data-filter="All" aria-pressed="true">All</button>
+            <button data-filter="POC/Demo" aria-pressed="false">POC/Demo</button>
+            <button data-filter="Sample" aria-pressed="false">Sample</button>
+            <button data-filter="Product/Application" aria-pressed="false">Product/Application</button>
+            <button data-filter="workshop" aria-pressed="false">workshop</button>
+          </div>
+        </div>
+        <div class="repositoryGrid">
+          <article class="repoCard cyan" data-category="POC/Demo">
+            <div class="cardTop"><span class="repoNumber">/01</span><span class="visibility">Private</span></div>
+            <div class="signal" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p class="useCase">Closed-loop Azure operations</p>
+            <span class="categoryLabel">POC/Demo</span>
+            <h2>Azure SRE Agent Platform</h2>
+            <p class="summary">An autonomous incident-response platform that turns Microsoft Teams signals into diagnosis, remediation pull requests, validation, and a clear resolution loop.</p>
+            <div class="cardFooter"><span>Python</span><a href="https://github.com/msftse-org/azure-sre-agent-platform">View repository <span aria-hidden="true">↗</span></a></div>
+          </article>
+
+          <article class="repoCard violet" data-category="POC/Demo">
+            <div class="cardTop"><span class="repoNumber">/02</span><span class="visibility">Public</span></div>
+            <div class="signal" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p class="useCase">Agent-ready enterprise data</p>
+            <span class="categoryLabel">POC/Demo</span>
+            <h2>SQL MCP</h2>
+            <p class="summary">A reference implementation for exposing Azure SQL to AI agents through MCP, API Management, Data API Builder, and Microsoft Entra authentication.</p>
+            <div class="cardFooter"><span>Shell</span><a href="https://github.com/msftse-org/sql-mcp">View repository <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <div class="emptyState" id="empty-state" hidden>
+            <span>0 / RESULTS</span>
+            <h2>Next solution loading.</h2>
+            <p>No repositories match this search and category combination. Try a different phrase or select All.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <div class="methodIntro">
+          <p class="kicker">The engineering loop</p>
+          <h2 id="method-title">Built for the distance between a demo and production.</h2>
+          <p>We combine customer context, Azure platform depth, and rapid prototyping to make complex ideas tangible—and reusable.</p>
+        </div>
+        <ol class="loop" aria-label="Solution engineering workflow">
+          <li><span>01</span><strong>Signal</strong><small>Start from a real field need</small></li>
+          <li><span>02</span><strong>Shape</strong><small>Design the shortest path to value</small></li>
+          <li><span>03</span><strong>Ship</strong><small>Build a working reference</small></li>
+          <li><span>04</span><strong>Share</strong><small>Turn the result into leverage</small></li>
+        </ol>
+      </section>
+
+      <section class="capabilityBand" aria-label="Core capabilities">
+        <div><span>01</span><strong>Agentic systems</strong></div>
+        <div><span>02</span><strong>Cloud operations</strong></div>
+        <div><span>03</span><strong>Enterprise data</strong></div>
+        <div><span>04</span><strong>Field accelerators</strong></div>
+      </section>
+
+      <footer>
+        <div><span class="statusDot" aria-hidden="true"></span><span>Ideas in motion</span></div>
+        <p>Built by solution engineers. Shared for builders.</p>
+        <a href="https://github.com/msftse-org">msftse-org ↗</a>
+      </footer>
+    </main>
+    <script>
+      const filterButtons = document.querySelectorAll("[data-filter]");
+      const cards = document.querySelectorAll("[data-category]");
+      const resultCount = document.querySelector("#result-count");
+      const emptyState = document.querySelector("#empty-state");
+      const searchInput = document.querySelector("#search-input");
+      let activeCategory = "All";
+
+      const renderCatalog = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let shown = 0;
+
+        cards.forEach((card) => {
+          const matchesCategory = activeCategory === "All" || card.dataset.category === activeCategory;
+          const matchesSearch = !query || card.textContent.toLowerCase().includes(query);
+          const visible = matchesCategory && matchesSearch;
+          card.hidden = !visible;
+          if (visible) shown += 1;
+        });
+
+        resultCount.textContent = `${String(shown).padStart(2, "0")} / SHOWN`;
+        emptyState.hidden = shown !== 0;
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeCategory = button.dataset.filter;
+
+          filterButtons.forEach((item) => {
+            const active = item === button;
+            item.classList.toggle("active", active);
+            item.setAttribute("aria-pressed", String(active));
+          });
+          renderCatalog();
+        });
+      });
+
+      searchInput.addEventListener("input", renderCatalog);
+    </script>
+  </body>
+</html>
