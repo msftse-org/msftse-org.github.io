@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "organization": "msftse-org",
+  "repositories": [
+    {
+      "name": "azure-sre-agent-platform",
+      "title": "Azure SRE Agent Platform",
+      "url": "https://github.com/msftse-org/azure-sre-agent-platform",
+      "summary": "An autonomous incident-response platform that turns Microsoft Teams signals into diagnosis, remediation pull requests, validation, and a clear resolution loop.",
+      "useCase": "Closed-loop Azure operations",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Private",
+      "accent": "cyan",
+      "topics": [],
+      "classification": {
+        "method": "override",
+        "confidence": "high",
+        "matches": []
+      }
+    },
+    {
+      "name": "sql-mcp",
+      "title": "SQL MCP",
+      "url": "https://github.com/msftse-org/sql-mcp",
+      "summary": "A reference implementation for exposing Azure SQL to AI agents through MCP, API Management, Data API Builder, and Microsoft Entra authentication.",
+      "useCase": "Agent-ready enterprise data",
+      "category": "POC/Demo",
+      "language": "Shell",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "classification": {
+        "method": "override",
+        "confidence": "high",
+        "matches": []
+      }
+    }
+  ]
+}
