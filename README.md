@@ -12,4 +12,4 @@ Preview it through a local HTTP server so the browser can load the JSON catalog:
 python3 -m http.server 8000
 ```
 
-The repository catalog is synchronized from the GitHub organization every 12 hours. Changes are proposed through a pull request for human review. See [the repository catalog automation design](docs/repository-catalog-automation.md) for classification rules, credentials, and local commands.
+The repository catalog is synchronized from the GitHub organization every 12 hours. New repositories can be analyzed by an OpenAI-compatible LLM using their tree, documentation, manifests, workflows, and entry points. The generated description, tags, use case, and category are proposed through a pull request for human review. See [the repository catalog automation design](docs/repository-catalog-automation.md) for setup, credentials, and local commands.

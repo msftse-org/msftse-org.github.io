@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "organization": "msftse-org",
   "repositories": [
     {
@@ -13,6 +13,12 @@
       "visibility": "Private",
       "accent": "cyan",
       "topics": [],
+      "tags": [
+        "azure",
+        "sre",
+        "ai-agents",
+        "incident-response"
+      ],
       "classification": {
         "method": "override",
         "confidence": "high",
@@ -30,6 +36,12 @@
       "visibility": "Public",
       "accent": "violet",
       "topics": [],
+      "tags": [
+        "azure-sql",
+        "mcp",
+        "api-management",
+        "entra-id"
+      ],
       "classification": {
         "method": "override",
         "confidence": "high",

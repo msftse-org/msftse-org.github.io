@@ -311,6 +311,26 @@ h1 span {
 .repoCard h2 { margin: 0; font-size: clamp(34px, 4vw, 56px); line-height: 1; letter-spacing: -0.055em; font-weight: 570; }
 .summary { max-width: 570px; margin: 25px 0 40px; color: var(--muted); line-height: 1.65; }
 
+.repositoryTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -18px 0 72px;
+  padding: 0;
+  list-style: none;
+}
+
+.repositoryTags:empty { display: none; }
+.repositoryTags li {
+  padding: 5px 8px;
+  border: 1px solid rgba(88, 230, 255, 0.2);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+}
+.violet .repositoryTags li { border-color: rgba(166, 140, 255, 0.24); }
+
 .cardFooter {
   position: absolute;
   bottom: 28px;

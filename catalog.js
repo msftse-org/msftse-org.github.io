@@ -29,6 +29,7 @@
       repository.category,
       repository.language,
       ...(repository.topics || []),
+      ...(repository.tags || []),
     ]
       .filter(Boolean)
       .join(" ")
@@ -54,6 +55,14 @@
     repositoryLink.append(externalIcon);
     footer.append(createElement("span", "", repository.language || "Multiple"), repositoryLink);
 
+    const tags = createElement("ul", "repositoryTags");
+    tags.setAttribute("aria-label", "Repository tags");
+    (repository.tags || []).forEach((tag) => {
+      const item = document.createElement("li");
+      item.textContent = tag;
+      tags.append(item);
+    });
+
     card.append(
       cardTop,
       signal,
@@ -61,6 +70,7 @@
       createElement("span", "categoryLabel", repository.category),
       createElement("h2", "", repository.title),
       createElement("p", "summary", repository.summary),
+      tags,
       footer,
     );
 
