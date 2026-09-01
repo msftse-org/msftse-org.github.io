@@ -12,6 +12,7 @@ from scripts.sync_repositories import (
     previous_llm_enrichments,
     select_context_entries,
     title_from_name,
+    validate_llm_api_key,
     validate_llm_endpoint,
     validate_llm_enrichment,
 )
@@ -225,6 +226,11 @@ class LlmAnalysisTests(unittest.TestCase):
         validate_llm_endpoint("https://example.test/chat")
         with self.assertRaises(ValueError):
             validate_llm_endpoint("http://example.test/chat")
+        with self.assertRaises(ValueError):
+            validate_llm_endpoint("https://example.test/chat\nhttps://second.example.test/chat")
+        validate_llm_api_key("single-api-key")
+        with self.assertRaises(ValueError):
+            validate_llm_api_key("first-key\nsecond-key")
 
     @patch("scripts.sync_repositories.request_llm_enrichment")
     @patch("scripts.sync_repositories.repository_analysis_context")

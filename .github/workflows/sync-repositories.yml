@@ -1,4 +1,4 @@
-name: Sync repository catalog
+name: Repository Catalog Sync
 
 on:
   schedule:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   sync:
-    name: Discover repositories and update catalog PR
+    name: Discover Repositories and Update Catalog PR
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -23,16 +23,16 @@ jobs:
       UPDATE_BRANCH: automation/repository-catalog
 
     steps:
-      - name: Check out the default branch
+      - name: Check Out Default Branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
 
-      - name: Run catalog unit tests
+      - name: Run Catalog Unit Tests
         run: python3 -m unittest discover -s tests -v
 
-      - name: Find the open catalog pull request
+      - name: Find Open Catalog Pull Request
         id: catalog_pr
         env:
           GH_TOKEN: ${{ github.token }}
@@ -59,7 +59,7 @@ jobs:
             echo "No reusable open catalog PR was found."
           fi
 
-      - name: Build catalog from the GitHub organization
+      - name: Build Catalog from GitHub Organization
         env:
           CATALOG_GITHUB_TOKEN: ${{ secrets.ORG_REPOSITORY_TOKEN || github.token }}
           CATALOG_LLM_ENDPOINT: ${{ secrets.CATALOG_LLM_ENDPOINT }}
@@ -68,7 +68,7 @@ jobs:
           CATALOG_LLM_AUTH_STYLE: ${{ secrets.CATALOG_LLM_AUTH_STYLE }}
         run: python3 scripts/sync_repositories.py --previous "$CATALOG_PREVIOUS"
 
-      - name: Detect catalog changes
+      - name: Detect Catalog Changes
         id: changes
         shell: bash
         run: |
@@ -79,7 +79,7 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create or update the catalog pull request
+      - name: Create or Update Catalog Pull Request
         if: steps.changes.outputs.changed == 'true' || steps.catalog_pr.outputs.number != ''
         env:
           GH_TOKEN: ${{ github.token }}
