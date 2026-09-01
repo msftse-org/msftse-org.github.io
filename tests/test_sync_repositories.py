@@ -1,3 +1,5 @@
+import io
+import json
 import os
 import unittest
 from unittest.mock import patch
@@ -10,6 +12,7 @@ from scripts.sync_repositories import (
     llm_auth_style,
     next_link,
     previous_llm_enrichments,
+    request_llm_enrichment,
     select_context_entries,
     title_from_name,
     validate_llm_api_key,
@@ -180,6 +183,41 @@ class CatalogTests(unittest.TestCase):
 
 
 class LlmAnalysisTests(unittest.TestCase):
+    @patch("scripts.sync_repositories.urllib.request.urlopen")
+    def test_llm_request_uses_default_temperature(self, urlopen):
+        response = {
+            "choices": [
+                {
+                    "message": {
+                        "content": json.dumps(
+                            {
+                                "summary": "A useful automation repository.",
+                                "useCase": "Cloud automation",
+                                "category": "Sample",
+                                "tags": ["azure", "python", "automation"],
+                            }
+                        )
+                    }
+                }
+            ]
+        }
+        urlopen.return_value.__enter__.return_value = io.BytesIO(
+            json.dumps(response).encode("utf-8")
+        )
+
+        request_llm_enrichment(
+            {"repository": {"name": "sample"}},
+            "https://example.test/chat/completions",
+            "single-api-key",
+            "gpt-5.6-luna",
+            6,
+        )
+
+        request = urlopen.call_args.args[0]
+        body = json.loads(request.data)
+        self.assertNotIn("temperature", body)
+        self.assertEqual(body["model"], "gpt-5.6-luna")
+
     def test_context_selection_prioritizes_readme_manifests_and_entrypoints(self):
         tree = [
             {"path": "src/helper.py", "sha": "1", "type": "blob"},

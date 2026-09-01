@@ -384,7 +384,6 @@ def request_llm_enrichment(
                 "content": "Analyze this repository context:\n" + json.dumps(context, ensure_ascii=False),
             },
         ],
-        "temperature": 0.1,
         "response_format": {"type": "json_object"},
     }
     if model:
