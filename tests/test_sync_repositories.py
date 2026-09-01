@@ -273,6 +273,58 @@ class LlmAnalysisTests(unittest.TestCase):
         analysis_context.assert_called_once()
         request_enrichment.assert_called_once()
 
+    @patch("scripts.sync_repositories.request_llm_enrichment")
+    @patch("scripts.sync_repositories.repository_analysis_context")
+    def test_enrichment_refreshes_after_a_new_source_push(
+        self, analysis_context, request_enrichment
+    ):
+        existing = {
+            "changing": {
+                "summary": "Old summary",
+                "useCase": "Old use case",
+                "category": "Sample",
+                "tags": ["one", "two", "three"],
+                "_metadata": {
+                    "method": "llm",
+                    "repositoryId": 42,
+                    "sourcePushedAt": "2026-08-01T00:00:00Z",
+                },
+            }
+        }
+        analysis_context.return_value = {"repository": {"name": "changing"}}
+        request_enrichment.return_value = {
+            "summary": "Updated summary",
+            "useCase": "Updated use case",
+            "category": "Product/Application",
+            "tags": ["four", "five", "six"],
+            "_metadata": {"method": "llm"},
+        }
+
+        result = enrich_catalog_repositories(
+            [
+                repository(
+                    "changing",
+                    id=42,
+                    pushed_at="2026-09-01T00:00:00Z",
+                )
+            ],
+            base_config(),
+            existing,
+            "github-token",
+            "https://example.test/chat",
+            "api-key",
+            "model",
+            False,
+        )
+
+        self.assertEqual(result["changing"]["summary"], "Updated summary")
+        self.assertEqual(
+            result["changing"]["_metadata"]["sourcePushedAt"],
+            "2026-09-01T00:00:00Z",
+        )
+        analysis_context.assert_called_once()
+        request_enrichment.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
