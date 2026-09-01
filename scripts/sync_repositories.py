@@ -21,6 +21,7 @@ ALLOWED_CATEGORIES = {"POC/Demo", "Sample", "Product/Application", "Workshop"}
 ACRONYMS = {"ai", "aks", "api", "cli", "mcp", "sre", "sql", "ui"}
 CURATED_METADATA_FIELDS = {"summary", "useCase", "category", "tags"}
 DEFAULT_LLM_SETTINGS = {
+    "refreshOnPush": True,
     "maxFiles": 8,
     "maxTreeEntries": 400,
     "maxCharactersPerFile": 5_000,
@@ -639,9 +640,20 @@ def enrich_catalog_repositories(
         if not should_include(repository, config, override) or has_curated_metadata(override):
             continue
         if not enrich_all and name in results:
-            previous_id = results[name].get("_metadata", {}).get("repositoryId")
+            metadata = results[name].get("_metadata", {})
+            previous_id = metadata.get("repositoryId")
             current_id = repository.get("id")
-            if previous_id is None or current_id is None or previous_id == current_id:
+            previous_push = metadata.get("sourcePushedAt")
+            current_push = repository.get("pushed_at")
+            repository_replaced = (
+                previous_id is not None and current_id is not None and previous_id != current_id
+            )
+            source_changed = (
+                bool(settings.get("refreshOnPush", True))
+                and current_push is not None
+                and previous_push != current_push
+            )
+            if not repository_replaced and not source_changed:
                 continue
             results.pop(name)
         print(f"Analyzing {name} with the configured LLM...", file=sys.stderr)
@@ -657,6 +669,8 @@ def enrich_catalog_repositories(
         )
         if repository.get("id") is not None:
             enrichment["_metadata"]["repositoryId"] = repository["id"]
+        if repository.get("pushed_at") is not None:
+            enrichment["_metadata"]["sourcePushedAt"] = repository["pushed_at"]
         results[name] = enrichment
     return results
 

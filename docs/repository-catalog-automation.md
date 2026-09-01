@@ -5,13 +5,14 @@ The landing page reads its repository cards from `data/repositories.json`. A sch
 ## Flow
 
 1. `.github/workflows/sync-repositories.yml` runs at minute 17 every 12 hours or through manual dispatch.
-2. `scripts/sync_repositories.py` pages through the GitHub organization repositories API.
-3. Forks, archived repositories, the organization profile, and this Pages repository are excluded by default.
-4. For a new, non-curated repository, the script gathers a bounded analysis context: GitHub metadata, up to 400 tree paths, the README, common manifests, workflows, and likely application entry points.
-5. When LLM secrets are configured, that context is sent to the configured OpenAI-compatible chat-completions endpoint. The response supplies a description, short use case, category, and searchable tags.
-6. The validated result is written to `data/repositories.json`. Previously generated LLM metadata is reused from either the default branch or a pending automation branch, so unchanged repositories do not consume tokens on every run.
-7. If the generated file differs from `main`, the workflow creates or updates `automation/repository-catalog` and its pull request.
-8. A maintainer reviews the proposed metadata and classification before merging. The workflow never merges or writes directly to `main`.
+2. The workflow looks for an open pull request from `automation/repository-catalog` to the default branch and reuses its validated LLM metadata when available.
+3. `scripts/sync_repositories.py` performs a fresh, paginated scan of the GitHub organization repositories API.
+4. Forks, archived repositories, the organization profile, and this Pages repository are excluded by default.
+5. For a new, non-curated repository, the script gathers a bounded analysis context: GitHub metadata, up to 400 tree paths, the README, common manifests, workflows, and likely application entry points.
+6. When LLM secrets are configured, that context is sent to the configured OpenAI-compatible chat-completions endpoint. The response supplies a description, short use case, category, and searchable tags.
+7. The validated result is written to `data/repositories.json`. Previously generated LLM metadata is reused from either the default branch or a pending automation branch. When `refreshOnPush` is enabled, repositories whose GitHub `pushed_at` value changed are analyzed again; unchanged repositories do not consume tokens.
+8. If the result differs from `main`, the workflow creates the PR or force-updates its automation branch and refreshes its title and body. If a newer scan matches `main`, any stale open catalog PR is closed automatically.
+9. A maintainer reviews the proposed metadata and classification before merging. The workflow never merges or writes directly to `main`.
 
 If the LLM secrets have not been added yet, synchronization continues with the existing deterministic metadata rules. Repositories that were not AI-enriched remain eligible for enrichment after the secrets are configured.
 

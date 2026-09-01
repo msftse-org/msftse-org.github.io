@@ -10,6 +10,7 @@
   "defaultCategory": "Product/Application",
   "llmEnrichment": {
     "enabled": true,
+    "refreshOnPush": true,
     "maxFiles": 8,
     "maxTreeEntries": 400,
     "maxCharactersPerFile": 5000,

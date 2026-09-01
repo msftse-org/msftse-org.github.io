@@ -32,15 +32,31 @@ jobs:
       - name: Run catalog unit tests
         run: python3 -m unittest discover -s tests -v
 
-      - name: Find prior generated metadata
+      - name: Find the open catalog pull request
+        id: catalog_pr
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
+          set -euo pipefail
+
           prior_catalog="$RUNNER_TEMP/prior-repositories.json"
-          if git fetch origin "refs/heads/$UPDATE_BRANCH:refs/remotes/origin/$UPDATE_BRANCH" && \
+          open_pr_number="$(gh pr list \
+            --head "$UPDATE_BRANCH" \
+            --base "$BASE_BRANCH" \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')"
+          echo "number=$open_pr_number" >> "$GITHUB_OUTPUT"
+
+          if [[ -n "$open_pr_number" ]] && \
+             git fetch origin "refs/heads/$UPDATE_BRANCH:refs/remotes/origin/$UPDATE_BRANCH" && \
              git show "origin/$UPDATE_BRANCH:data/repositories.json" > "$prior_catalog"; then
             echo "CATALOG_PREVIOUS=$prior_catalog" >> "$GITHUB_ENV"
+            echo "Reusing validated LLM metadata from open PR #$open_pr_number."
           else
             echo "CATALOG_PREVIOUS=data/repositories.json" >> "$GITHUB_ENV"
+            echo "No reusable open catalog PR was found."
           fi
 
       - name: Build catalog from the GitHub organization
@@ -64,9 +80,11 @@ jobs:
           fi
 
       - name: Create or update the catalog pull request
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true' || steps.catalog_pr.outputs.number != ''
         env:
           GH_TOKEN: ${{ github.token }}
+          CATALOG_CHANGED: ${{ steps.changes.outputs.changed }}
+          OPEN_PR_NUMBER: ${{ steps.catalog_pr.outputs.number }}
           PR_BODY: |
             This automated PR refreshes the landing-page repository catalog from the GitHub organization.
 
@@ -84,13 +102,20 @@ jobs:
           cp data/repositories.json "$generated_catalog"
           git restore --staged --worktree data/repositories.json
 
+          if [[ "$CATALOG_CHANGED" != "true" ]]; then
+            echo "The fresh scan matches $BASE_BRANCH; closing stale catalog PR #$OPEN_PR_NUMBER."
+            gh pr close "$OPEN_PR_NUMBER" \
+              --comment "Closing automatically because the latest repository scan matches the catalog on $BASE_BRANCH."
+            exit 0
+          fi
+
           git fetch origin "$BASE_BRANCH"
           remote_branch_exists=false
           if git fetch origin "refs/heads/$UPDATE_BRANCH:refs/remotes/origin/$UPDATE_BRANCH"; then
             remote_branch_exists=true
           fi
 
-          open_pr_number="$(gh pr list --head "$UPDATE_BRANCH" --base "$BASE_BRANCH" --state open --json number --jq '.[0].number // empty')"
+          open_pr_number="$OPEN_PR_NUMBER"
           if [[ "$remote_branch_exists" == "true" ]]; then
             base_sha="$(git rev-parse "origin/$BASE_BRANCH")"
             merge_base="$(git merge-base "origin/$BASE_BRANCH" "origin/$UPDATE_BRANCH" || true)"
@@ -116,5 +141,8 @@ jobs:
               --title "chore: sync repository catalog" \
               --body "$PR_BODY"
           else
+            gh pr edit "$open_pr_number" \
+              --title "chore: sync repository catalog" \
+              --body "$PR_BODY"
             echo "Updated catalog PR #$open_pr_number."
           fi
