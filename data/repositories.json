@@ -696,7 +696,7 @@
       "name": "ptu-advisor",
       "title": "Ptu Advisor",
       "url": "https://github.com/msftse-org/ptu-advisor",
-      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, compares PTU and PAYG costs, calculates break-even scenarios, and provides recommendations through a dashboard, FastAPI service, and CLI.",
+      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, models PTU and PAYG costs with spillover and caching, and provides recommendations through a dashboard, FastAPI, CLI, and HTML reports.",
       "useCase": "Azure OpenAI capacity and cost planning",
       "category": "Product/Application",
       "language": "Python",
@@ -710,11 +710,11 @@
       ],
       "tags": [
         "azure-openai",
-        "azure-monitor",
+        "cost-analysis",
+        "capacity-planning",
         "fastapi",
         "react",
-        "cost-analysis",
-        "ptu"
+        "azure-monitor"
       ],
       "classification": {
         "method": "llm",
@@ -724,7 +724,7 @@
       "enrichment": {
         "method": "llm",
         "repositoryId": 1172470038,
-        "sourcePushedAt": "2026-05-26T07:58:15Z"
+        "sourcePushedAt": "2026-09-03T09:26:16Z"
       }
     },
     {
