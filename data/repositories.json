@@ -47,6 +47,814 @@
         "confidence": "high",
         "matches": []
       }
+    },
+    {
+      "name": "adx-vector-simi",
+      "title": "Adx Vector Simi",
+      "url": "https://github.com/msftse-org/adx-vector-simi",
+      "summary": "Python-based Azure Event Hubs log producer that generates synthetic application events at a configurable high rate for testing queued ingestion latency into Azure Data Explorer, with a reference Vector configuration.",
+      "useCase": "Azure Data Explorer ingestion throughput and latency testing",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "python",
+        "azure-event-hubs",
+        "azure-data-explorer",
+        "synthetic-logs",
+        "throughput-testing"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1183469255,
+        "sourcePushedAt": "2026-03-19T20:19:13Z"
+      }
+    },
+    {
+      "name": "ai-gateway-poc",
+      "title": "AI Gateway Poc",
+      "url": "https://github.com/msftse-org/ai-gateway-poc",
+      "summary": "An Azure AI Gateway proof of concept that deploys API Management with declarative policies for token rate limiting, semantic caching, content safety, regional failover, managed-identity authentication, and token metrics across Azure OpenAI backends.",
+      "useCase": "Evaluating enterprise AI gateway controls",
+      "category": "POC/Demo",
+      "language": "HCL",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "azure",
+        "api-management",
+        "azure-openai",
+        "opentofu",
+        "semantic-caching",
+        "observability"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1191849390,
+        "sourcePushedAt": "2026-03-25T16:42:12Z"
+      }
+    },
+    {
+      "name": "azure-foundry-multi-agents-workflow",
+      "title": "Azure Foundry Multi Agents Workflow",
+      "url": "https://github.com/msftse-org/azure-foundry-multi-agents-workflow",
+      "summary": "A Python multi-agent workflow using Microsoft Agent Framework and Azure AI Foundry to route requests to Slack, Jira, and GitHub agents backed by remote MCP servers, with sequential and parallel execution modes plus evaluation and CI/CD deployment support.",
+      "useCase": "Cross-platform developer workflow orchestration",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "python",
+        "azure-ai-foundry",
+        "microsoft-agent-framework",
+        "mcp",
+        "multi-agent-orchestration",
+        "slack-jira-github"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1158689990,
+        "sourcePushedAt": "2026-05-13T11:22:24Z"
+      }
+    },
+    {
+      "name": "azure-pg-agent-mem",
+      "title": "Azure Pg Agent Mem",
+      "url": "https://github.com/msftse-org/azure-pg-agent-mem",
+      "summary": "A TypeScript service that provides multi-tenant persistent memory for OpenCode, Claude Code, and GitHub Copilot CLI through MCP, using Azure PostgreSQL Flexible Server, pgvector embeddings, hybrid search, and PostgreSQL row-level security.",
+      "useCase": "Persistent memory for collaborative AI coding agents",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "typescript",
+        "azure-postgresql",
+        "pgvector",
+        "mcp",
+        "hybrid-search",
+        "multi-tenant"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1188752807,
+        "sourcePushedAt": "2026-03-26T07:43:35Z"
+      }
+    },
+    {
+      "name": "azure-sql-database-transition",
+      "title": "Azure SQL Database Transition",
+      "url": "https://github.com/msftse-org/azure-sql-database-transition",
+      "summary": "A Terraform and SQL scripting toolkit for planning and provisioning Azure SQL Database General Purpose Serverless migration targets from Hyperscale, with CDC readiness checks, optional geo-replicas, private networking, and monitoring.",
+      "useCase": "Azure SQL tier migration planning and target provisioning",
+      "category": "POC/Demo",
+      "language": "HCL",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "azure",
+        "azure-sql",
+        "cdc",
+        "database-migration",
+        "terraform"
+      ],
+      "tags": [
+        "terraform",
+        "azure-sql",
+        "database-migration",
+        "change-data-capture",
+        "private-link",
+        "azure-monitor"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1307488203,
+        "sourcePushedAt": "2026-07-21T08:58:18Z"
+      }
+    },
+    {
+      "name": "azureml-with-databricks",
+      "title": "Azureml With Databricks",
+      "url": "https://github.com/msftse-org/azureml-with-databricks",
+      "summary": "A client-ready MLOps reference implementation that uses Azure Databricks for governed feature engineering, training, evaluation, and batch scoring, Azure Machine Learning for MLflow model registration and managed serving, and GitHub Actions for CI/CD.",
+      "useCase": "Azure Databricks and Azure ML MLOps workshop",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "azure-databricks",
+        "azure-machine-learning",
+        "mlflow",
+        "unity-catalog",
+        "github-actions",
+        "mlops"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1324970547,
+        "sourcePushedAt": "2026-08-06T08:45:52Z"
+      }
+    },
+    {
+      "name": "better2gether-care-harness",
+      "title": "Better2gether Care Harness",
+      "url": "https://github.com/msftse-org/better2gether-care-harness",
+      "summary": "A Python proof of concept demonstrating a Microsoft Agent Framework harness on Azure AI Foundry that delegates care-team questions to Databricks Genie and knowledge tools, with Azure-hosted deployment and a Microsoft Teams bridge.",
+      "useCase": "Care-team copilot for connected wellness-device support",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "azure-ai-foundry",
+        "agent-framework",
+        "databricks-genie",
+        "unity-catalog",
+        "microsoft-teams",
+        "python"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1311688012,
+        "sourcePushedAt": "2026-07-25T09:24:29Z"
+      }
+    },
+    {
+      "name": "copilot-workshop-v2",
+      "title": "Copilot Workshop V2",
+      "url": "https://github.com/msftse-org/copilot-workshop-v2",
+      "summary": "An instructor-led GitHub Copilot workshop covering VS Code, CLI workflows, testing, context engineering, code review, governance, and agentic scenarios using a Flask practice application.",
+      "useCase": "GitHub Copilot skills training",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "github-copilot",
+        "vscode",
+        "python",
+        "flask",
+        "code-review",
+        "governance"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1297719279,
+        "sourcePushedAt": "2026-07-11T19:13:24Z"
+      }
+    },
+    {
+      "name": "enterprise-agent-memory",
+      "title": "Enterprise Agent Memory",
+      "url": "https://github.com/msftse-org/enterprise-agent-memory",
+      "summary": "Enterprise Agent Memory is a TypeScript and Fastify platform that provides persistent, searchable, multi-tenant memory for AI coding agents using Azure Cosmos DB, AI Search, Azure OpenAI, Blob Storage, REST APIs, and an MCP bridge.",
+      "useCase": "Persistent context for enterprise AI coding agents",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "azure",
+        "cosmos-db",
+        "ai-search",
+        "azure-openai",
+        "mcp",
+        "multi-tenancy"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1241864597,
+        "sourcePushedAt": "2026-06-01T12:03:13Z"
+      }
+    },
+    {
+      "name": "fabric-etl-ai-foundry",
+      "title": "Fabric Etl AI Foundry",
+      "url": "https://github.com/msftse-org/fabric-etl-ai-foundry",
+      "summary": "An end-to-end Azure solution that provisions Microsoft Fabric, processes Confluence data through Bronze, Silver, and Gold OneLake layers, indexes the results in Azure AI Search, and creates an Azure AI Foundry agent for analysis.",
+      "useCase": "Medallion ETL and AI-powered enterprise data analysis",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "azure-fabric",
+        "onelake",
+        "etl",
+        "azure-ai-search",
+        "ai-foundry",
+        "confluence"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1166411394,
+        "sourcePushedAt": "2026-03-15T16:29:36Z"
+      }
+    },
+    {
+      "name": "fabric-powerbi-branded-dashboard",
+      "title": "Fabric Powerbi Branded Dashboard",
+      "url": "https://github.com/msftse-org/fabric-powerbi-branded-dashboard",
+      "summary": "A Claude Code skill that transforms existing PBIR report folders into branded Microsoft Fabric Power BI reports, validates and packages them, and publishes new or updated report definitions through Fabric REST APIs.",
+      "useCase": "Automated branded Power BI report generation",
+      "category": "Product/Application",
+      "language": "JavaScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "claude-code",
+        "dashboard",
+        "microsoft-fabric",
+        "pbir",
+        "powerbi",
+        "skill"
+      ],
+      "tags": [
+        "claude-code",
+        "microsoft-fabric",
+        "power-bi",
+        "pbir",
+        "report-automation"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1293518721,
+        "sourcePushedAt": "2026-07-08T13:29:09Z"
+      }
+    },
+    {
+      "name": "foundry-multi-sdk-samples",
+      "title": "Foundry Multi Sdk Samples",
+      "url": "https://github.com/msftse-org/foundry-multi-sdk-samples",
+      "summary": "A collection of runnable Python samples demonstrating Azure AI Foundry model inference across multiple SDKs, authentication methods, agents, hosted agents, evaluation, load testing, fine-tuning, and Foundry SDK operations.",
+      "useCase": "Learning Azure AI Foundry SDK integration patterns",
+      "category": "Sample",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "azure",
+        "foundry",
+        "python"
+      ],
+      "tags": [
+        "python",
+        "azure-ai-foundry",
+        "sdk-comparison",
+        "agents",
+        "evaluation",
+        "fine-tuning"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1165538761,
+        "sourcePushedAt": "2026-08-08T14:30:11Z"
+      }
+    },
+    {
+      "name": "foundry-slack-agent",
+      "title": "Foundry Slack Agent",
+      "url": "https://github.com/msftse-org/foundry-slack-agent",
+      "summary": "A Python Azure Functions application that asynchronously processes Slack mentions, invokes a Microsoft Foundry agent, maintains thread state in Azure Table Storage, and posts replies back to Slack, with Terraform-based cloud infrastructure deployment.",
+      "useCase": "Slack-based Microsoft Foundry agent deployment",
+      "category": "Product/Application",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "python",
+        "azure-functions",
+        "microsoft-foundry",
+        "slack",
+        "terraform",
+        "async-processing"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1291286534,
+        "sourcePushedAt": "2026-07-07T07:01:24Z"
+      }
+    },
+    {
+      "name": "frontlens-afd",
+      "title": "Frontlens Afd",
+      "url": "https://github.com/msftse-org/frontlens-afd",
+      "summary": "FrontLens is a Next.js log exploration application for Azure Front Door access logs, offering filtering and drill-down by country, visitor, URL path, anomalies, and raw requests across mock, Azure Log Analytics, and ClickHouse data sources.",
+      "useCase": "Azure Front Door access-log observability",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "nextjs",
+        "typescript",
+        "azure-front-door",
+        "log-analytics",
+        "clickhouse",
+        "observability"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1280103521,
+        "sourcePushedAt": "2026-07-02T15:54:42Z"
+      }
+    },
+    {
+      "name": "github-copilot-workshop",
+      "title": "Github Copilot Workshop",
+      "url": "https://github.com/msftse-org/github-copilot-workshop",
+      "summary": "A hands-on workshop repository teaching GitHub Copilot across the CLI, VS Code, and GitHub web interface, with Flask examples, debugging exercises, custom prompts, and context-engineering workflows.",
+      "useCase": "GitHub Copilot skills training",
+      "category": "Workshop",
+      "language": "Shell",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "github-copilot",
+        "flask",
+        "python",
+        "prompt-engineering",
+        "debugging",
+        "vscode"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1153346199,
+        "sourcePushedAt": "2026-02-16T13:53:52Z"
+      }
+    },
+    {
+      "name": "litellm-masterclass",
+      "title": "Litellm Masterclass",
+      "url": "https://github.com/msftse-org/litellm-masterclass",
+      "summary": "A hands-on Python workshop that teaches LiteLLM AI gateway development through SDK usage, routing and failover, proxy deployment, security, cost management, Azure AI Search RAG, and content safety using a Docker-based local environment.",
+      "useCase": "AI gateway enablement workshop",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "litellm",
+        "azure-openai",
+        "docker-compose",
+        "routing",
+        "security",
+        "rag"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1167609082,
+        "sourcePushedAt": "2026-02-26T17:07:40Z"
+      }
+    },
+    {
+      "name": "microsoft-agent-framework-geekacademy",
+      "title": "Microsoft Agent Framework Geekacademy",
+      "url": "https://github.com/msftse-org/microsoft-agent-framework-geekacademy",
+      "summary": "A Python proof of concept demonstrating a Microsoft Agent Framework multi-agent content pipeline with Researcher, Writer, and Reviewer agents, MCP tools, Azure AI Foundry integration, memory, A2A, REST/SSE serving, tracing, and evaluation.",
+      "useCase": "Hands-on multi-agent content generation demonstration",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "python",
+        "microsoft-agent-framework",
+        "azure-ai-foundry",
+        "mcp",
+        "a2a-protocol",
+        "multi-agent-orchestration"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1152657063,
+        "sourcePushedAt": "2026-02-15T12:33:42Z"
+      }
+    },
+    {
+      "name": "microsoft-client-data-architecture-skill",
+      "title": "Microsoft Client Data Architecture Skill",
+      "url": "https://github.com/msftse-org/microsoft-client-data-architecture-skill",
+      "summary": "An installable Codex skill for generating client-ready Microsoft Fabric and Azure Databricks data architecture diagrams covering Kafka and event ingestion, medallion lakehouses, governance, analytics, and AI capabilities, with official icon assets and an SVG generator.",
+      "useCase": "Client-ready data platform architecture diagram generation",
+      "category": "Sample",
+      "language": "JavaScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "microsoft-fabric",
+        "azure-databricks",
+        "architecture-diagrams",
+        "kafka",
+        "lakehouse",
+        "data-governance"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1292000842,
+        "sourcePushedAt": "2026-07-07T08:25:38Z"
+      }
+    },
+    {
+      "name": "npcentral-public",
+      "title": "Npcentral Public",
+      "url": "https://github.com/msftse-org/npcentral-public",
+      "summary": "NPCentral is a multi-tenant AI agent platform reference implementation for gaming, combining conversational agent creation, lifecycle management, model routing, tool discovery, runtime execution, observability, and a playable NPC game demo.",
+      "useCase": "Building and demonstrating AI-powered game NPC platforms",
+      "category": "POC/Demo",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "ai-agents",
+        "gaming",
+        "next-js",
+        "typescript",
+        "azure",
+        "observability"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1256897295,
+        "sourcePushedAt": "2026-06-02T07:18:46Z"
+      }
+    },
+    {
+      "name": "opencode-agent-builder",
+      "title": "Opencode Agent Builder",
+      "url": "https://github.com/msftse-org/opencode-agent-builder",
+      "summary": "A reusable OpenCode configuration toolkit providing AI coding-agent definitions, development commands, project-rule templates, and skills for browser automation, end-to-end testing, and Azure AI Agent Framework development.",
+      "useCase": "AI-assisted software development workflow setup",
+      "category": "Workshop",
+      "language": "Multiple",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "opencode",
+        "ai-agents",
+        "coding-assistants",
+        "azure-ai",
+        "mcp",
+        "e2e-testing"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1170549390,
+        "sourcePushedAt": "2026-03-02T08:49:19Z"
+      }
+    },
+    {
+      "name": "opencode-workshop",
+      "title": "Opencode Workshop",
+      "url": "https://github.com/msftse-org/opencode-workshop",
+      "summary": "A Markdown-based OpenCode workflow that guides software projects from requirements and project rules through feature planning, implementation, session context loading, and atomic commits using commands and specialized agents.",
+      "useCase": "Structured AI-assisted software development workflow",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "opencode",
+        "markdown",
+        "ai-agents",
+        "project-planning",
+        "developer-workflow"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1264893778,
+        "sourcePushedAt": "2026-06-10T09:20:21Z"
+      }
+    },
+    {
+      "name": "ptu-advisor",
+      "title": "Ptu Advisor",
+      "url": "https://github.com/msftse-org/ptu-advisor",
+      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, compares PTU and PAYG costs, calculates break-even scenarios, and provides recommendations through a dashboard, FastAPI service, and CLI.",
+      "useCase": "Azure OpenAI capacity and cost planning",
+      "category": "Product/Application",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "azureopenai",
+        "foundry",
+        "frontier",
+        "ptu"
+      ],
+      "tags": [
+        "azure-openai",
+        "azure-monitor",
+        "fastapi",
+        "react",
+        "cost-analysis",
+        "ptu"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1172470038,
+        "sourcePushedAt": "2026-05-26T07:58:15Z"
+      }
+    },
+    {
+      "name": "sdlc-e2e-agents",
+      "title": "Sdlc E2e Agents",
+      "url": "https://github.com/msftse-org/sdlc-e2e-agents",
+      "summary": "A TypeScript Slack bot powered by the GitHub Copilot SDK that orchestrates software delivery workflows from Jira requirements through code generation, testing, reviews, pull requests, and deployment.",
+      "useCase": "AI-assisted end-to-end software delivery automation",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "typescript",
+        "slack",
+        "github-copilot",
+        "jira",
+        "playwright",
+        "devops"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1177928258,
+        "sourcePushedAt": "2026-03-10T14:16:01Z"
+      }
+    },
+    {
+      "name": "skills-and-mcps",
+      "title": "Skills And Mcps",
+      "url": "https://github.com/msftse-org/skills-and-mcps",
+      "summary": "A curated collection of reusable AI agent skills, MCP diagramming guidance, Azure SDK references, and product requirement documents for developer workflows.",
+      "useCase": "AI-assisted developer workflow enablement",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [],
+      "tags": [
+        "ai-agents",
+        "mcp",
+        "azure",
+        "python",
+        "drawio",
+        "developer-tools"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1166369007,
+        "sourcePushedAt": "2026-03-11T08:54:02Z"
+      }
+    },
+    {
+      "name": "The-Curator",
+      "title": "The Curator",
+      "url": "https://github.com/msftse-org/The-Curator",
+      "summary": "The Curator is an internal Azure-based platform for submitting, classifying, security-scanning, reviewing, publishing, versioning, and periodically curating reusable agent skill bundles.",
+      "useCase": "Governed agent skill catalog management",
+      "category": "Product/Application",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "fastapi",
+        "nextjs",
+        "azure",
+        "cosmos-db",
+        "redis",
+        "agent-governance"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1240575782,
+        "sourcePushedAt": "2026-06-11T07:13:32Z"
+      }
+    },
+    {
+      "name": "vibecode-azure-deploy-skill",
+      "title": "Vibecode Azure Deploy Skill",
+      "url": "https://github.com/msftse-org/vibecode-azure-deploy-skill",
+      "summary": "An AI-agent-oriented Python CLI skill that provisions and deploys full-stack applications to Azure using Container Apps Express or Flex, with optional Static Web Apps, Azure Container Registry, and PostgreSQL Flexible Server resources.",
+      "useCase": "Agent-driven full-stack Azure deployment",
+      "category": "Product/Application",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "azure",
+        "container-apps",
+        "deployment",
+        "fullstack",
+        "hermes-agent",
+        "postgres",
+        "static-web-apps",
+        "vercel-alternative"
+      ],
+      "tags": [
+        "azure",
+        "container-apps",
+        "python",
+        "deployment",
+        "ai-agents",
+        "postgresql"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1240570970,
+        "sourcePushedAt": "2026-05-16T13:12:15Z"
+      }
     }
   ]
 }
