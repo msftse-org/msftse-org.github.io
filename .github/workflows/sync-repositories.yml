@@ -15,7 +15,8 @@ concurrency:
 
 jobs:
   sync:
-    name: Discover Repositories and Update Catalog PR
+    name: Discover Public Repositories and Update Catalog PR
+    if: github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -61,12 +62,12 @@ jobs:
 
       - name: Build Catalog from GitHub Organization
         env:
-          CATALOG_GITHUB_TOKEN: ${{ secrets.ORG_REPOSITORY_TOKEN || github.token }}
+          CATALOG_GITHUB_TOKEN: ${{ github.token }}
           CATALOG_LLM_ENDPOINT: ${{ secrets.CATALOG_LLM_ENDPOINT }}
           CATALOG_LLM_API_KEY: ${{ secrets.CATALOG_LLM_API_KEY }}
           CATALOG_LLM_MODEL: ${{ secrets.CATALOG_LLM_MODEL }}
           CATALOG_LLM_AUTH_STYLE: ${{ secrets.CATALOG_LLM_AUTH_STYLE }}
-        run: python3 scripts/sync_repositories.py --previous "$CATALOG_PREVIOUS"
+        run: python3 scripts/sync_repositories.py --visibility public --previous "$CATALOG_PREVIOUS"
 
       - name: Detect Catalog Changes
         id: changes

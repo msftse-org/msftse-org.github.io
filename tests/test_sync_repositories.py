@@ -2,6 +2,7 @@ import io
 import json
 import os
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from scripts.sync_repositories import (
@@ -9,9 +10,12 @@ from scripts.sync_repositories import (
     classify_repository,
     extract_json_object,
     enrich_catalog_repositories,
+    fetch_organization_repositories,
     llm_auth_style,
+    main,
     next_link,
     previous_llm_enrichments,
+    read_json,
     request_llm_enrichment,
     select_context_entries,
     title_from_name,
@@ -24,7 +28,7 @@ from scripts.sync_repositories import (
 def base_config():
     return {
         "organization": "msftse-org",
-        "includePrivate": False,
+        "repositoryVisibility": "public",
         "excludeArchived": True,
         "excludeForks": True,
         "excludedRepositories": ["msftse-org.github.io"],
@@ -87,6 +91,35 @@ class ClassificationTests(unittest.TestCase):
 
 
 class CatalogTests(unittest.TestCase):
+    def test_checked_in_config_includes_all_matching_repositories(self):
+        root = Path(__file__).resolve().parents[1]
+        config = read_json(root / "data/catalog-config.json")
+        visibility = config["repositoryVisibility"]
+        repositories = [
+            repository(name, visibility=visibility, private=visibility == "private", **values)
+            for name, values in (
+                ("regular", {}),
+                ("archived", {"archived": True}),
+                ("fork", {"fork": True}),
+                (".github", {}),
+                ("msftse-org.github.io", {}),
+                ("msftse-org-private", {}),
+            )
+        ]
+        entries = build_catalog(repositories, config)["repositories"]
+        self.assertEqual({entry["name"] for entry in entries}, {entry["name"] for entry in repositories})
+        catalog = read_json(root / "data/repositories.json")
+        self.assertTrue(all(entry["visibility"].lower() == visibility for entry in catalog["repositories"]))
+
+    def test_unknown_or_conflicting_visibility_is_excluded(self):
+        config = base_config()
+        unknown = repository("unknown")
+        unknown.pop("visibility")
+        unknown.pop("private")
+        conflicting = repository("conflicting", private=True)
+        config["overrides"] = {entry["name"]: {"include": True} for entry in (unknown, conflicting)}
+        self.assertEqual(build_catalog([unknown, conflicting], config)["repositories"], [])
+
     def test_filters_and_pinned_repository(self):
         config = base_config()
         config["overrides"] = {
@@ -109,9 +142,44 @@ class CatalogTests(unittest.TestCase):
 
         catalog = build_catalog(repositories, config)
         names = [entry["name"] for entry in catalog["repositories"]]
-        self.assertEqual(names, ["private-reference", "active-demo"])
-        self.assertEqual(catalog["repositories"][0]["visibility"], "Private")
-        self.assertEqual(catalog["repositories"][1]["category"], "POC/Demo")
+        self.assertEqual(names, ["active-demo"])
+        self.assertEqual(catalog["repositories"][0]["visibility"], "Public")
+        self.assertEqual(catalog["repositories"][0]["category"], "POC/Demo")
+
+    def test_visibility_cannot_be_bypassed_by_overrides(self):
+        repositories = [
+            repository("public-repo"),
+            repository("private-repo", private=True, visibility="private"),
+            repository("internal-repo", private=True, visibility="internal"),
+        ]
+        for visibility in ("public", "private"):
+            with self.subTest(visibility=visibility):
+                config = base_config()
+                config["repositoryVisibility"] = visibility
+                config["overrides"] = {
+                    entry["name"]: {"include": True, "visibility": "Public"}
+                    for entry in repositories
+                }
+                entries = build_catalog(repositories, config)["repositories"]
+                self.assertEqual([entry["name"] for entry in entries], [f"{visibility}-repo"])
+                self.assertEqual(entries[0]["visibility"], visibility.capitalize())
+
+    def test_undiscovered_pinned_repositories_are_not_published(self):
+        config = base_config()
+        config["overrides"] = {
+            "missing-repo": {
+                "include": True,
+                "url": "https://github.com/msftse-org/missing-repo",
+                "visibility": "Public",
+            }
+        }
+        self.assertEqual(build_catalog([], config)["repositories"], [])
+
+    def test_invalid_visibility_is_rejected(self):
+        config = base_config()
+        config["repositoryVisibility"] = "all"
+        with self.assertRaises(ValueError):
+            build_catalog([], config)
 
     def test_output_order_is_stable(self):
         catalog = build_catalog([repository("zeta"), repository("alpha")], base_config())
@@ -182,7 +250,63 @@ class CatalogTests(unittest.TestCase):
         )
 
 
+class DiscoveryTests(unittest.TestCase):
+    @patch("scripts.sync_repositories.urllib.request.urlopen")
+    def test_visibility_query_and_pagination(self, urlopen):
+        for visibility in ("public", "private"):
+            with self.subTest(visibility=visibility):
+                pages = [io.BytesIO(b'[{"name":"first"}]'), io.BytesIO(b'[{"name":"second"}]')]
+                next_url = f"https://api.github.com/orgs/msftse-org/repos?type={visibility}&page=2"
+                pages[0].headers = {"Link": f'<{next_url}>; rel="next"'}
+                pages[1].headers = {}
+                urlopen.reset_mock()
+                urlopen.return_value.__enter__.side_effect = pages
+                entries = fetch_organization_repositories("msftse-org", "test-token", visibility)
+                self.assertEqual([entry["name"] for entry in entries], ["first", "second"])
+                self.assertIn(f"type={visibility}", urlopen.call_args_list[0].args[0].full_url)
+                self.assertEqual(urlopen.call_args_list[1].args[0].full_url, next_url)
+
+    @patch("scripts.sync_repositories.urllib.request.urlopen")
+    def test_private_discovery_requires_token(self, urlopen):
+        with self.assertRaisesRegex(ValueError, "read token"):
+            fetch_organization_repositories("msftse-org", None, "private")
+        urlopen.assert_not_called()
+
+    @patch("scripts.sync_repositories.read_json")
+    @patch("scripts.sync_repositories.urllib.request.urlopen")
+    def test_private_cli_does_not_fall_back_to_github_token(self, urlopen, read_config):
+        config = base_config()
+        config["repositoryVisibility"] = "private"
+        read_config.return_value = config
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "repository-scoped-token"}, clear=True), patch(
+            "sys.argv", ["sync_repositories.py", "--skip-llm", "--dry-run"]
+        ), self.assertRaisesRegex(ValueError, "read token"):
+            main()
+        urlopen.assert_not_called()
+
+    @patch("scripts.sync_repositories.read_json", return_value=base_config())
+    @patch("scripts.sync_repositories.urllib.request.urlopen")
+    def test_workflow_visibility_must_match_config(self, urlopen, read_config):
+        with patch("sys.argv", ["sync_repositories.py", "--visibility", "private"]), self.assertRaisesRegex(
+            ValueError, "does not match"
+        ):
+            main()
+        urlopen.assert_not_called()
+
+
 class LlmAnalysisTests(unittest.TestCase):
+    @patch("scripts.sync_repositories.repository_analysis_context")
+    def test_wrong_visibility_is_not_sent_to_llm(self, analysis_context):
+        for visibility, wrong_visibility in (("public", "private"), ("private", "public")):
+            config = base_config()
+            config["repositoryVisibility"] = visibility
+            config["overrides"] = {"wrong-repo": {"include": True}}
+            entries = [repository("wrong-repo", visibility=wrong_visibility, private=wrong_visibility == "private")]
+            self.assertEqual(enrich_catalog_repositories(
+                entries, config, {}, "token", "https://example.test/chat", "key", None, False
+            ), {})
+        analysis_context.assert_not_called()
+
     @patch("scripts.sync_repositories.urllib.request.urlopen")
     def test_llm_request_uses_default_temperature(self, urlopen):
         response = {

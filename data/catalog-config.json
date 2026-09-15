@@ -1,12 +1,9 @@
 {
   "organization": "msftse-org",
-  "includePrivate": false,
-  "excludeArchived": true,
-  "excludeForks": true,
-  "excludedRepositories": [
-    ".github",
-    "msftse-org.github.io"
-  ],
+  "repositoryVisibility": "public",
+  "excludeArchived": false,
+  "excludeForks": false,
+  "excludedRepositories": [],
   "defaultCategory": "Product/Application",
   "llmEnrichment": {
     "enabled": true,
@@ -46,19 +43,6 @@
     }
   ],
   "overrides": {
-    "azure-sre-agent-platform": {
-      "include": true,
-      "order": 1,
-      "title": "Azure SRE Agent Platform",
-      "url": "https://github.com/msftse-org/azure-sre-agent-platform",
-      "summary": "An autonomous incident-response platform that turns Microsoft Teams signals into diagnosis, remediation pull requests, validation, and a clear resolution loop.",
-      "useCase": "Closed-loop Azure operations",
-      "category": "POC/Demo",
-      "tags": ["azure", "sre", "ai-agents", "incident-response"],
-      "language": "Python",
-      "visibility": "Private",
-      "accent": "cyan"
-    },
     "sql-mcp": {
       "order": 2,
       "title": "SQL MCP",
