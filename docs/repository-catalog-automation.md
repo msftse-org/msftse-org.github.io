@@ -6,8 +6,8 @@ The landing page reads its repository cards from `data/repositories.json`. A sch
 
 1. `.github/workflows/sync-repositories.yml` runs at minute 17 every 12 hours or through manual dispatch.
 2. The workflow looks for an open pull request from `automation/repository-catalog` to the default branch and reuses its validated LLM metadata when available.
-3. `scripts/sync_repositories.py` performs a fresh, paginated scan of the GitHub organization repositories API.
-4. Forks, archived repositories, the organization profile, and this Pages repository are excluded by default.
+3. `scripts/sync_repositories.py` performs a fresh, paginated scan of the GitHub organization repositories API with `type=public`. The workflow passes `--visibility public`, which must match `repositoryVisibility` in the configuration.
+4. All public repositories are included, including forks, archives, the organization profile, and the catalog repository. Private, internal, and unknown visibility are rejected before overrides or LLM analysis.
 5. For a new, non-curated repository, the script gathers a bounded analysis context: GitHub metadata, up to 400 tree paths, the README, common manifests, workflows, and likely application entry points.
 6. When LLM secrets are configured, that context is sent to the configured OpenAI-compatible chat-completions endpoint. The response supplies a description, short use case, category, and searchable tags.
 7. The validated result is written to `data/repositories.json`. Previously generated LLM metadata is reused from either the default branch or a pending automation branch. When `refreshOnPush` is enabled, repositories whose GitHub `pushed_at` value changed are analyzed again; unchanged repositories do not consume tokens.
@@ -33,7 +33,7 @@ The generated `classification` object explains how each result was selected. For
 - `catalog-product`
 - `catalog-workshop`
 
-If a repository needs curated copy, tags, ordering, visibility, or categorization, add an entry under `overrides`. Manual values always win and the LLM can fill any missing metadata. An override containing all of `summary`, `useCase`, `category`, and `tags` is fully curated and skips LLM analysis; set `llmEnrichment` to `false` to skip it explicitly. Setting `include` to `true` pins a repository even when it is not returned by the API. Setting it to `false` excludes a repository.
+If a repository needs curated copy, tags, ordering, or categorization, add an entry under `overrides`. Manual metadata values win and the LLM can fill missing metadata. Visibility always comes from GitHub, never an override. An override containing all of `summary`, `useCase`, `category`, and `tags` is fully curated and skips LLM analysis; set `llmEnrichment` to `false` to skip it explicitly. Setting `include` to `true` can bypass optional archive, fork, and name exclusions, but never visibility filtering or API discovery. Repositories missing from the API response are not synthesized from overrides. Setting `include` to `false` excludes a repository.
 
 ## LLM configuration
 
@@ -55,9 +55,13 @@ The script requests JSON and validates category membership, description length, 
 
 ## Authentication and repository settings
 
-The default `GITHUB_TOKEN` can discover public organization repositories and update this repository. To discover private repositories, create an `ORG_REPOSITORY_TOKEN` Actions secret with read-only metadata access to the intended organization repositories, then set `includePrivate` to `true` in the catalog configuration.
+This repository must be public and use `repositoryVisibility: "public"`. The workflow uses `GITHUB_TOKEN` for public discovery and catalog pull requests; it does not use an organization-wide private-repository token. The old `includePrivate` setting is replaced by the required `repositoryVisibility` field, with only `public` and `private` accepted.
 
-Private repository names and descriptions become public when included in `data/repositories.json`; enable private discovery only when that disclosure is intentional.
+Private discovery belongs exclusively in `msftse-org/msftse-org-private`, configured with `repositoryVisibility: "private"` and an `ORG_REPOSITORY_TOKEN` secret. That token must cover all organization repositories, with metadata read permission for discovery and contents read permission for LLM analysis. Never copy private catalog data into this public repository.
+
+Set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** in both repositories. The deployment validates the catalog's visibility and uploads only `index.html`, `styles.css`, `catalog.js`, and `data/repositories.json`. Legacy branch-based Pages publishing bypasses these workflow checks. The private site must additionally remain privately published (`public: false` in the Pages API); its sync and deployment workflows reject public Pages or legacy publishing.
+
+The public navigation links to the private site's actual Pages URL, https://turbo-adventure-9m6p176.pages.github.io/. GitHub controls access to that destination. If that URL changes, update the link. Removing previously published private metadata from the current catalog does not remove it from Git history or caches; historical cleanup requires a separate owner-approved process.
 
 The repository must allow GitHub Actions to create pull requests. In GitHub, enable **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests**. Approval permission is not used, but GitHub exposes creation through this setting.
 

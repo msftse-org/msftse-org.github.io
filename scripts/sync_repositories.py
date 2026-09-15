@@ -90,6 +90,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--input", type=Path, help="Read a GitHub API response from a local JSON fixture")
     parser.add_argument("--token-env", default="CATALOG_GITHUB_TOKEN")
+    parser.add_argument("--visibility", choices=("public", "private"))
     parser.add_argument(
         "--enrich-all",
         action="store_true",
@@ -115,11 +116,16 @@ def next_link(link_header: str | None) -> str | None:
     return None
 
 
-def fetch_organization_repositories(organization: str, token: str | None) -> list[dict[str, Any]]:
+def fetch_organization_repositories(
+    organization: str, token: str | None, visibility: str = "public"
+) -> list[dict[str, Any]]:
+    catalog_visibility({"repositoryVisibility": visibility})
+    if visibility == "private" and not token:
+        raise ValueError("Private discovery requires an organization-wide read token")
     encoded_org = urllib.parse.quote(organization, safe="")
     url: str | None = (
         f"https://api.github.com/orgs/{encoded_org}/repos"
-        "?per_page=100&type=all&sort=full_name&direction=asc"
+        f"?per_page=100&type={visibility}&sort=full_name&direction=asc"
     )
     repositories: list[dict[str, Any]] = []
 
@@ -484,9 +490,31 @@ def validate_category(category: str) -> None:
         raise ValueError(f"Unsupported category {category!r}; expected one of: {choices}")
 
 
+def catalog_visibility(config: dict[str, Any]) -> str:
+    visibility = config.get("repositoryVisibility")
+    if visibility not in {"public", "private"}:
+        raise ValueError("repositoryVisibility must be 'public' or 'private'")
+    return visibility
+
+
+def repository_visibility(repository: dict[str, Any]) -> str:
+    visibility = repository.get("visibility")
+    if visibility is not None:
+        if visibility == "public" and repository.get("private") is True:
+            return "unknown"
+        return str(visibility).lower()
+    if repository.get("private") is True:
+        return "private"
+    if repository.get("private") is False:
+        return "public"
+    return "unknown"
+
+
 def should_include(
     repository: dict[str, Any], config: dict[str, Any], override: dict[str, Any]
 ) -> bool:
+    if repository_visibility(repository) != catalog_visibility(config):
+        return False
     if override.get("include") is False:
         return False
     if override.get("include") is True:
@@ -497,26 +525,7 @@ def should_include(
         return False
     if config.get("excludeForks", True) and repository.get("fork"):
         return False
-    if not config.get("includePrivate", False) and repository.get("private"):
-        return False
     return True
-
-
-def synthetic_repository(name: str, override: dict[str, Any]) -> dict[str, Any]:
-    if not override.get("url"):
-        raise ValueError(f"Pinned repository {name!r} requires an override URL")
-    visibility = str(override.get("visibility", "Public"))
-    return {
-        "name": name,
-        "html_url": override["url"],
-        "description": override.get("summary"),
-        "language": override.get("language"),
-        "visibility": visibility.lower(),
-        "private": visibility.lower() == "private",
-        "topics": override.get("topics", []),
-        "archived": False,
-        "fork": False,
-    }
 
 
 def stable_accent(name: str) -> str:
@@ -538,10 +547,7 @@ def catalog_entry(
     if not isinstance(url, str) or not url.startswith(expected_prefix):
         raise ValueError(f"Repository {name!r} has an invalid organization URL: {url!r}")
 
-    raw_visibility = override.get("visibility") or repository.get("visibility")
-    if not raw_visibility:
-        raw_visibility = "private" if repository.get("private") else "public"
-    visibility = str(raw_visibility).capitalize()
+    visibility = repository_visibility(repository).capitalize()
     topics = sorted({str(topic).lower() for topic in repository.get("topics") or []})
     summary = override.get("summary") or enrichment.get("summary") or repository.get("description")
     raw_tags = override.get("tags") or enrichment.get("tags") or topics
@@ -579,13 +585,10 @@ def build_catalog(
     config: dict[str, Any],
     enrichments: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
+    catalog_visibility(config)
     enrichments = enrichments or {}
     overrides = config.get("overrides", {})
     candidates = {repository["name"]: repository for repository in repositories}
-
-    for name, override in overrides.items():
-        if override.get("include") is True and name not in candidates:
-            candidates[name] = synthetic_repository(name, override)
 
     entries: list[tuple[int, dict[str, Any]]] = []
     for name, repository in candidates.items():
@@ -692,17 +695,22 @@ def serialized(catalog: dict[str, Any]) -> str:
 def main() -> int:
     args = parse_args()
     config = read_json(args.config)
+    visibility = catalog_visibility(config)
+    if args.visibility and args.visibility != visibility:
+        raise ValueError("Workflow visibility does not match repositoryVisibility in the config")
     previous_path = args.previous or args.output
     previous: dict[str, Any] = {"repositories": []}
     if previous_path.exists():
         previous = read_json(previous_path)
-    github_token = os.environ.get(args.token_env) or os.environ.get("GITHUB_TOKEN")
+    github_token = os.environ.get(args.token_env)
+    if visibility == "public" and not github_token:
+        github_token = os.environ.get("GITHUB_TOKEN")
     if args.input:
         repositories = read_json(args.input)
         if not isinstance(repositories, list):
             raise ValueError("The input fixture must contain a JSON array")
     else:
-        repositories = fetch_organization_repositories(config["organization"], github_token)
+        repositories = fetch_organization_repositories(config["organization"], github_token, visibility)
 
     enrichments = previous_llm_enrichments(previous)
     llm_settings = {**DEFAULT_LLM_SETTINGS, **config.get("llmEnrichment", {})}

@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     name: Build Pages Artifact
+    if: github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repository
@@ -26,10 +27,27 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Validate and Stage Public Catalog
+        run: |
+          python3 - <<'PY'
+          from scripts.sync_repositories import catalog_visibility, read_json
+          from pathlib import Path
+
+          config = read_json(Path("data/catalog-config.json"))
+          catalog = read_json(Path("data/repositories.json"))
+          if catalog_visibility(config) != "public" or any(
+              entry.get("visibility") != "Public" for entry in catalog["repositories"]
+          ):
+              raise SystemExit("Refusing to publish a non-public catalog")
+          PY
+          mkdir -p _site/data
+          cp index.html styles.css catalog.js _site/
+          cp data/repositories.json _site/data/
+
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     name: Deploy GitHub Pages
