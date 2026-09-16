@@ -29,8 +29,8 @@
       "name": "adx-opentelemetry-demo",
       "title": "Adx Opentelemetry Demo",
       "url": "https://github.com/msftse-org/adx-opentelemetry-demo",
-      "summary": "OpenTelemetry Demo with Azure Data Explorer as the unified backend for traces, metrics, and logs. Terraform + AKS + Workload Identity.",
-      "useCase": "Field-tested proof of concept",
+      "summary": "A fork of the OpenTelemetry Demo that runs a multi-service shopping application on Docker Compose or AKS, exports traces, metrics, and logs through the OpenTelemetry Collector to Azure Data Explorer, and visualizes telemetry in Grafana.",
+      "useCase": "Unified Azure observability demonstration",
       "category": "POC/Demo",
       "language": "TypeScript",
       "visibility": "Public",
@@ -41,16 +41,22 @@
         "opentelemetry"
       ],
       "tags": [
+        "opentelemetry",
         "azure-data-explorer",
         "grafana",
-        "opentelemetry"
+        "aks",
+        "kubernetes",
+        "workload-identity"
       ],
       "classification": {
-        "method": "keyword",
-        "confidence": "medium",
-        "matches": [
-          "keyword:demo"
-        ]
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1128137885,
+        "sourcePushedAt": "2026-01-08T12:00:50Z"
       }
     },
     {
@@ -612,18 +618,29 @@
       "name": "msftse-org.github.io",
       "title": "Msftse Org Github Io",
       "url": "https://github.com/msftse-org/msftse-org.github.io",
-      "summary": "MSFTSE Solution Engineering Lab — Azure and AI field accelerators",
-      "useCase": "Production-oriented solution",
+      "summary": "A static GitHub Pages catalog for publicly available MSFTSE Azure and AI solution-engineering accelerators, with client-side search and filtering plus automated Python and LLM-assisted repository metadata synchronization.",
+      "useCase": "Public accelerator discovery",
       "category": "Product/Application",
       "language": "Python",
       "visibility": "Public",
       "accent": "cyan",
       "topics": [],
-      "tags": [],
+      "tags": [
+        "github-pages",
+        "python",
+        "javascript",
+        "catalog",
+        "llm-automation"
+      ],
       "classification": {
-        "method": "default",
-        "confidence": "low",
+        "method": "llm",
+        "confidence": "ai-generated",
         "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1343770397,
+        "sourcePushedAt": "2026-09-16T04:56:15Z"
       }
     },
     {
@@ -719,7 +736,7 @@
       "name": "ptu-advisor",
       "title": "Ptu Advisor",
       "url": "https://github.com/msftse-org/ptu-advisor",
-      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, compares PTU and PAYG costs, calculates break-even scenarios, and provides recommendations through a dashboard, FastAPI service, and CLI.",
+      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, models PTU and PAYG costs with spillover and caching, and provides recommendations through a dashboard, FastAPI, CLI, and HTML reports.",
       "useCase": "Azure OpenAI capacity and cost planning",
       "category": "Product/Application",
       "language": "Python",
@@ -733,11 +750,11 @@
       ],
       "tags": [
         "azure-openai",
-        "azure-monitor",
+        "cost-analysis",
+        "capacity-planning",
         "fastapi",
         "react",
-        "cost-analysis",
-        "ptu"
+        "azure-monitor"
       ],
       "classification": {
         "method": "llm",
@@ -747,7 +764,7 @@
       "enrichment": {
         "method": "llm",
         "repositoryId": 1172470038,
-        "sourcePushedAt": "2026-05-26T07:58:15Z"
+        "sourcePushedAt": "2026-09-03T09:26:16Z"
       }
     },
     {
