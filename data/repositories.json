@@ -29,8 +29,8 @@
       "name": "adx-opentelemetry-demo",
       "title": "Adx Opentelemetry Demo",
       "url": "https://github.com/msftse-org/adx-opentelemetry-demo",
-      "summary": "OpenTelemetry Demo with Azure Data Explorer as the unified backend for traces, metrics, and logs. Terraform + AKS + Workload Identity.",
-      "useCase": "Field-tested proof of concept",
+      "summary": "A fork of the OpenTelemetry Demo that runs a multi-service shopping application on Docker Compose or AKS, exports traces, metrics, and logs through the OpenTelemetry Collector to Azure Data Explorer, and visualizes telemetry in Grafana.",
+      "useCase": "Unified Azure observability demonstration",
       "category": "POC/Demo",
       "language": "TypeScript",
       "visibility": "Public",
@@ -41,16 +41,22 @@
         "opentelemetry"
       ],
       "tags": [
+        "opentelemetry",
         "azure-data-explorer",
         "grafana",
-        "opentelemetry"
+        "aks",
+        "kubernetes",
+        "workload-identity"
       ],
       "classification": {
-        "method": "keyword",
-        "confidence": "medium",
-        "matches": [
-          "keyword:demo"
-        ]
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1128137885,
+        "sourcePushedAt": "2026-01-08T12:00:50Z"
       }
     },
     {
@@ -83,6 +89,38 @@
       }
     },
     {
+      "name": "ai-gateway-demo",
+      "title": "AI Gateway Demo",
+      "url": "https://github.com/msftse-org/ai-gateway-demo",
+      "summary": "Reusable Azure AI gateway demonstration that provisions API Management, Microsoft Foundry models and agent resources, semantic caching, content safety, backend load balancing, test clients, monitoring dashboards, and presenter runbooks with Terraform.",
+      "useCase": "Azure AI gateway architecture demonstration and pilot lab",
+      "category": "POC/Demo",
+      "language": "HCL",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "poc-demo"
+      ],
+      "tags": [
+        "azure",
+        "terraform",
+        "api-management",
+        "microsoft-foundry",
+        "semantic-cache",
+        "observability"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1437142520,
+        "sourcePushedAt": "2026-10-28T14:07:08Z"
+      }
+    },
+    {
       "name": "ai-gateway-poc",
       "title": "AI Gateway Poc",
       "url": "https://github.com/msftse-org/ai-gateway-poc",
@@ -110,6 +148,37 @@
         "method": "llm",
         "repositoryId": 1191849390,
         "sourcePushedAt": "2026-03-25T16:42:12Z"
+      }
+    },
+    {
+      "name": "apim-apiops-workshop",
+      "title": "Apim Apiops Workshop",
+      "url": "https://github.com/msftse-org/apim-apiops-workshop",
+      "summary": "A hands-on Azure API Management workshop that teaches native APIOps CLI deployment, environment promotion, rollback, filtering, secret handling, API Center management, validation, and CI/CD scaffold generation.",
+      "useCase": "Azure API management operations training",
+      "category": "Workshop",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "workshop"
+      ],
+      "tags": [
+        "azure-api-management",
+        "apiops-cli",
+        "configuration-as-code",
+        "api-center",
+        "ci-cd"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1433150199,
+        "sourcePushedAt": "2026-10-25T13:29:06Z"
       }
     },
     {
@@ -269,6 +338,102 @@
       }
     },
     {
+      "name": "claude-code-with-github-copilot",
+      "title": "Claude Code With Github Copilot",
+      "url": "https://github.com/msftse-org/claude-code-with-github-copilot",
+      "summary": "An enterprise Azure deployment that routes the official Claude Code CLI and Claude Desktop Gateway through LiteLLM using each employee’s GitHub Copilot OAuth connection, with per-user keys, GitHub Actions enrollment and revocation, macOS setup, and isolated infrastructure.",
+      "useCase": "Enterprise Claude Code access through GitHub Copilot seats",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "product-application"
+      ],
+      "tags": [
+        "azure",
+        "litellm",
+        "github-copilot",
+        "typescript",
+        "terraform",
+        "entra-id"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1424121821,
+        "sourcePushedAt": "2026-11-28T18:06:04Z"
+      }
+    },
+    {
+      "name": "claude-codex-foundry",
+      "title": "Claude Codex Foundry",
+      "url": "https://github.com/msftse-org/claude-codex-foundry",
+      "summary": "A Python and React application that deploys Claude and Codex access through Azure AI Foundry and API Management, provides Microsoft Entra authentication and Mac onboarding, and offers an administration portal for model access, usage, costs, budgets, content logs, and governance.",
+      "useCase": "Enterprise administration of governed Claude and Codex access",
+      "category": "Product/Application",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "product-application"
+      ],
+      "tags": [
+        "azure",
+        "ai-foundry",
+        "api-management",
+        "entra-id",
+        "react",
+        "governance"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1419655527,
+        "sourcePushedAt": "2026-11-14T05:06:43Z"
+      }
+    },
+    {
+      "name": "claude-teams-litellm-copilot",
+      "title": "Claude Teams Litellm Copilot",
+      "url": "https://github.com/msftse-org/claude-teams-litellm-copilot",
+      "summary": "An onboarding package that configures an existing LiteLLM gateway, issues private developer invitations, and connects Claude Code to Claude Teams with GitHub Copilot fallback through per-user OAuth credentials.",
+      "useCase": "Claude Code gateway onboarding",
+      "category": "POC/Demo",
+      "language": "HTML",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "poc-demo"
+      ],
+      "tags": [
+        "claude-code",
+        "litellm",
+        "github-copilot",
+        "oauth",
+        "gateway",
+        "onboarding"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1452725303,
+        "sourcePushedAt": "2026-11-16T07:56:48Z"
+      }
+    },
+    {
       "name": "copilot-workshop-v2",
       "title": "Copilot Workshop V2",
       "url": "https://github.com/msftse-org/copilot-workshop-v2",
@@ -395,11 +560,43 @@
       }
     },
     {
+      "name": "fabric-rti-monitoring",
+      "title": "Fabric Rti Monitoring",
+      "url": "https://github.com/msftse-org/fabric-rti-monitoring",
+      "summary": "A cloud observability demonstration that collects OpenTelemetry logs, traces, and metrics in Microsoft Fabric Eventhouse and provides KQL dashboards, Grafana views, optional mock observability apps, and on-call workflows.",
+      "useCase": "Evaluating Azure and Fabric observability architectures",
+      "category": "POC/Demo",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "violet",
+      "topics": [
+        "poc-demo"
+      ],
+      "tags": [
+        "opentelemetry",
+        "microsoft-fabric",
+        "eventhouse",
+        "kql",
+        "azure-managed-grafana",
+        "bicep"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1441886107,
+        "sourcePushedAt": "2026-11-25T10:59:32Z"
+      }
+    },
+    {
       "name": "foundry-multi-sdk-samples",
       "title": "Foundry Multi Sdk Samples",
       "url": "https://github.com/msftse-org/foundry-multi-sdk-samples",
-      "summary": "A collection of runnable Python samples demonstrating Azure AI Foundry model inference across multiple SDKs, authentication methods, agents, hosted agents, evaluation, load testing, fine-tuning, and Foundry SDK operations.",
-      "useCase": "Learning Azure AI Foundry SDK integration patterns",
+      "summary": "A collection of runnable Python samples demonstrating Azure AI Foundry model inference across Foundry, Azure OpenAI, OpenAI, and Azure AI Inference SDKs, along with agents, evaluation, load testing, fine-tuning, hosted agents, and prompt tracing.",
+      "useCase": "Learning and comparing Azure AI Foundry SDK integrations",
       "category": "Sample",
       "language": "Python",
       "visibility": "Public",
@@ -425,7 +622,7 @@
       "enrichment": {
         "method": "llm",
         "repositoryId": 1165538761,
-        "sourcePushedAt": "2026-08-08T14:30:11Z"
+        "sourcePushedAt": "2026-09-29T14:22:19Z"
       }
     },
     {
@@ -459,11 +656,43 @@
       }
     },
     {
+      "name": "frontdoor-deploy",
+      "title": "Frontdoor Deploy",
+      "url": "https://github.com/msftse-org/frontdoor-deploy",
+      "summary": "Reusable Terraform modules and examples for deploying Azure Front Door Premium with WAF policies, HTTPS routing, custom domains, and Azure Web App origins connected through Private Link.",
+      "useCase": "Azure Front Door private-origin deployment",
+      "category": "Sample",
+      "language": "HCL",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "sample"
+      ],
+      "tags": [
+        "terraform",
+        "azure",
+        "front-door",
+        "waf",
+        "private-link",
+        "infrastructure-as-code"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1432037165,
+        "sourcePushedAt": "2026-10-24T10:05:44Z"
+      }
+    },
+    {
       "name": "frontlens-afd",
       "title": "Frontlens Afd",
       "url": "https://github.com/msftse-org/frontlens-afd",
-      "summary": "FrontLens is a Next.js log exploration application for Azure Front Door access logs, offering filtering and drill-down by country, visitor, URL path, anomalies, and raw requests across mock, Azure Log Analytics, and ClickHouse data sources.",
-      "useCase": "Azure Front Door access-log observability",
+      "summary": "FrontLens is a Next.js log exploration application for Azure Front Door access logs, providing filtering and drill-down by country, visitor, URL path, geography, anomalies, and raw requests through mock, Azure Log Analytics, or ClickHouse data sources.",
+      "useCase": "Azure Front Door traffic analysis and troubleshooting",
       "category": "Product/Application",
       "language": "TypeScript",
       "visibility": "Public",
@@ -471,11 +700,11 @@
       "topics": [],
       "tags": [
         "nextjs",
-        "typescript",
         "azure-front-door",
         "log-analytics",
         "clickhouse",
-        "observability"
+        "traffic-analysis",
+        "anomaly-detection"
       ],
       "classification": {
         "method": "llm",
@@ -485,7 +714,39 @@
       "enrichment": {
         "method": "llm",
         "repositoryId": 1280103521,
-        "sourcePushedAt": "2026-07-02T15:54:42Z"
+        "sourcePushedAt": "2026-11-17T11:52:44Z"
+      }
+    },
+    {
+      "name": "frontlens-aks-aca",
+      "title": "Frontlens AKS Aca",
+      "url": "https://github.com/msftse-org/frontlens-aks-aca",
+      "summary": "FrontLens is a private Azure Front Door analytics application that ingests diagnostic and WAF logs through Event Hubs into Azure Data Explorer and provides dashboards for traffic, performance, geography, paths, visitors, origins, and security, with Terraform deployment to Container Apps or AKS.",
+      "useCase": "Private Azure Front Door observability",
+      "category": "Product/Application",
+      "language": "TypeScript",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [
+        "product-application"
+      ],
+      "tags": [
+        "azure",
+        "azure-front-door",
+        "azure-data-explorer",
+        "terraform",
+        "container-apps",
+        "aks"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1432973218,
+        "sourcePushedAt": "2026-10-25T08:19:54Z"
       }
     },
     {
@@ -612,18 +873,30 @@
       "name": "msftse-org.github.io",
       "title": "Msftse Org Github Io",
       "url": "https://github.com/msftse-org/msftse-org.github.io",
-      "summary": "MSFTSE Solution Engineering Lab — Azure and AI field accelerators",
-      "useCase": "Production-oriented solution",
+      "summary": "A static GitHub Pages catalog for MSFTSE Solution Engineering Lab repositories, with client-side search and filtering plus scheduled Python and GitHub Actions synchronization that proposes repository metadata for review.",
+      "useCase": "Public accelerator repository discovery",
       "category": "Product/Application",
       "language": "Python",
       "visibility": "Public",
       "accent": "cyan",
       "topics": [],
-      "tags": [],
+      "tags": [
+        "github-pages",
+        "javascript",
+        "python",
+        "github-actions",
+        "repository-catalog",
+        "llm-enrichment"
+      ],
       "classification": {
-        "method": "default",
-        "confidence": "low",
+        "method": "llm",
+        "confidence": "ai-generated",
         "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1343770397,
+        "sourcePushedAt": "2026-11-28T07:58:48Z"
       }
     },
     {
@@ -719,8 +992,8 @@
       "name": "ptu-advisor",
       "title": "Ptu Advisor",
       "url": "https://github.com/msftse-org/ptu-advisor",
-      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, compares PTU and PAYG costs, calculates break-even scenarios, and provides recommendations through a dashboard, FastAPI service, and CLI.",
-      "useCase": "Azure OpenAI capacity and cost planning",
+      "summary": "PTU Advisor is a Python and React application that analyzes Azure AI Foundry deployment metrics, pricing, caching, and workload characteristics to recommend Provisioned Throughput Units or PAYG using cost curves, break-even analysis, dashboards, APIs, and CLI reports.",
+      "useCase": "Azure AI Foundry capacity and cost planning",
       "category": "Product/Application",
       "language": "Python",
       "visibility": "Public",
@@ -733,11 +1006,11 @@
       ],
       "tags": [
         "azure-openai",
-        "azure-monitor",
+        "ai-foundry",
+        "cost-optimization",
         "fastapi",
         "react",
-        "cost-analysis",
-        "ptu"
+        "azure-monitor"
       ],
       "classification": {
         "method": "llm",
@@ -747,7 +1020,7 @@
       "enrichment": {
         "method": "llm",
         "repositoryId": 1172470038,
-        "sourcePushedAt": "2026-05-26T07:58:15Z"
+        "sourcePushedAt": "2026-11-14T05:05:14Z"
       }
     },
     {
@@ -808,6 +1081,36 @@
         "method": "llm",
         "repositoryId": 1166369007,
         "sourcePushedAt": "2026-03-11T08:54:02Z"
+      }
+    },
+    {
+      "name": "sre-agent-demo",
+      "title": "SRE Agent Demo",
+      "url": "https://github.com/msftse-org/sre-agent-demo",
+      "summary": "An Azure AKS closed-loop incident response demo combining a React storefront, FastAPI checkout service, Azure observability, Azure SRE Agent investigation and remediation proposals, GitHub Actions deployment, and Microsoft Teams incident communication.",
+      "useCase": "Human-governed SRE incident response rehearsal",
+      "category": "POC/Demo",
+      "language": "Python",
+      "visibility": "Public",
+      "accent": "cyan",
+      "topics": [],
+      "tags": [
+        "azure-aks",
+        "sre",
+        "observability",
+        "github-actions",
+        "microsoft-teams",
+        "terraform"
+      ],
+      "classification": {
+        "method": "llm",
+        "confidence": "ai-generated",
+        "matches": []
+      },
+      "enrichment": {
+        "method": "llm",
+        "repositoryId": 1323141369,
+        "sourcePushedAt": "2026-09-06T07:40:47Z"
       }
     },
     {
